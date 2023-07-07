@@ -1,0 +1,10 @@
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Write all your style here ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓*/
+body {
+    margin: 0px;
+}
+
+body canvas {
+    width: 800px;
+}
+
+/*  ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Write all your style here ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
