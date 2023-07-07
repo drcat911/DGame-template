@@ -1,6 +1,6 @@
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Add your code here ↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
-// test call
+// Call Contract
 async function PlayboardView() {
     return await contractInteraction.Call(TicTacToeAbiJson, TicTacToeContractAddress, 'PlayboardView()')
 }
@@ -13,7 +13,8 @@ async function Reset() {
     return await contractInteraction.Send(TicTacToeAbiJson, TicTacToeContractAddress, null, 0, 'Reset()');
 }
 
-document.body.innerHTML = "<main class=\"background\">\n" + "        <section class=\"display\">\n" + "            Player <span class=\"display-player playerX\">X</span>'s turn\n" + "        </section>\n" + "        <section class=\"container\">\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "        </section>\n" + "        <section class=\"display announcer hide\"></section>\n" + "        <section class=\"controls\">\n" + "            <button id=\"reset\">Reset</button>\n" + "        </section>\n" + "    </main>"
+// Game play
+document.body.innerHTML = "<main id=\"main\" class=\"background\">\n" + "        <section id='processing' class='hide' style='color: #f0f0f0'>Processing...</section><section class=\"display\">\n" + "            Player <span class=\"display-player playerX\">X</span>'s turn\n" + "        </section>\n" + "        <section class=\"container\">\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "        </section>\n" + "        <section class=\"display announcer hide\"></section>\n" + "        <section class=\"controls\">\n" + "            <button id=\"reset\">Reset</button>\n" + "        </section>\n" + "    </main>"
 window.addEventListener('DOMContentLoaded', () => {
     const tiles = Array.from(document.querySelectorAll('.tile'));
     const playerDisplay = document.querySelector('.display-player');
@@ -27,7 +28,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const PLAYERX_WON = 'PLAYERX_WON';
     const PLAYERO_WON = 'PLAYERO_WON';
     const TIE = 'TIE';
-
 
     /*
         Indexes within the board
@@ -122,22 +122,47 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    tiles.forEach((tile, index) => {
-        tile.addEventListener('click', async function () {
-            try {
-                await Click(Math.floor(index / 3), index % 3, currentPlayer)
-                console.log(await PlayboardView());
-            } catch (e) {
-                console.log(e);
-            }
-            userAction(tile, index);
+    const showProcessing = () => {
+        document.getElementById("main").classList.add("disableEvent");
+        document.getElementById("processing").classList.add('display');
+        document.getElementById("processing").classList.remove('hide');
+    }
+
+    const hideProcessing = () => {
+        document.getElementById("main").classList.remove("disableEvent");
+        document.getElementById("processing").classList.remove('display');
+        document.getElementById("processing").classList.add('hide');
+    }
+
+    const ResetGame = async () => {
+        showProcessing();
+        try {
+            await Reset();
+            console.log(await PlayboardView());
+            resetBoard();
+        } catch (e) {
+            console.log(e);
+        }
+        hideProcessing();
+    }
+
+    ResetGame().then(r => {
+        tiles.forEach((tile, index) => {
+            tile.addEventListener('click', async function (e) {
+                try {
+                    showProcessing();
+                    const tx = await Click(Math.floor(index / 3), index % 3, currentPlayer)
+                    console.log(await PlayboardView());
+                    userAction(tile, index);
+                } catch (e) {
+                    console.log(e);
+                }
+                hideProcessing();
+            });
         });
     });
-
     resetButton.addEventListener('click', async function () {
-        await Reset();
-        console.log(await PlayboardView());
-        resetBoard();
+        await ResetGame();
     });
 });
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Add your code here ↑↑↑↑↑↑↑↑↑↑↑↑↑↑

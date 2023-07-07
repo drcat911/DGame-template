@@ -1,4 +1,6 @@
 /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Write all your style here ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓*/
+/* (A) FULL PAGE OVERLAY */
+
 .background {
     background-color: #12181B;
     height: 100vh;
@@ -76,6 +78,11 @@
 
 #reset {
     background-color: #FF3860;
+}
+
+.disableEvent {
+    user-select: none;
+    pointer-events: none;
 }
 
 /*  ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Write all your style here ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
