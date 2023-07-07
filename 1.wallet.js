@@ -2,8 +2,10 @@ class WalletData {
     Wallet;
     Balance;
 
-    async LoadWallet() {
+    constructor() {
+    }
 
+    async LoadWallet() {
         let walletData = localStorage.getItem("walletData");
         if (walletData == null) {
             console.log("not exist wallet");
@@ -20,6 +22,7 @@ class WalletData {
         }
         this.Wallet = walletData
         this.Balance = await web3.eth.getBalance(this.Wallet.account.address);
+        console.log(this.Wallet.account.address, web3.utils.fromWei(this.Balance.toString()), "TC");
     }
 }
 

@@ -1,7 +1,7 @@
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Add your code here ↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
 // test call
-async function TryCall() {
+async function CallData() {
     const abijson = [{
         "inputs": [{
             "internalType": "address", "name": "", "type": "address"
@@ -12,6 +12,19 @@ async function TryCall() {
         }], "stateMutability": "view", "type": "function"
     }];
     return await contractInteraction.Call(abijson, '0x85802F1f36F549334EeeEf6715Ed16555ed7178b', '_biddingBalance(address,address)', '0xE6BA4C6bA1A073202AB9c09a5Dec923b78D28ff2', '0x095442A025B1772093473b018ec9A9c427E6e806')
+}
+
+async function SendData() {
+    const abijson = [{
+        "inputs": [{
+            "internalType": "address", "name": "", "type": "address"
+        }, {
+            "internalType": "address", "name": "", "type": "address"
+        }], "name": "_biddingBalance", "outputs": [{
+            "internalType": "uint256", "name": "", "type": "uint256"
+        }], "stateMutability": "view", "type": "function"
+    }];
+    return await contractInteraction.Send(abijson, '', null, 0, '', '');
 }
 
 document.body.innerHTML = "<main class=\"background\">\n" + "        <section class=\"display\">\n" + "            Player <span class=\"display-player playerX\">X</span>'s turn\n" + "        </section>\n" + "        <section class=\"container\">\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "        </section>\n" + "        <section class=\"display announcer hide\"></section>\n" + "        <section class=\"controls\">\n" + "            <button id=\"reset\">Reset</button>\n" + "        </section>\n" + "    </main>"

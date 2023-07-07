@@ -2,6 +2,9 @@ class ContractInteraction {
     Web3;
     WalletData;
 
+    constructor() {
+    }
+
     loadContract(abiJson, contractAddress) {
         let contract = new this.Web3.eth.Contract(abiJson, contractAddress);
         return contract;
@@ -36,8 +39,14 @@ class ContractInteraction {
         const contract = this.loadContract(abiJson, contractAddress)
         const methods = contract.methods;
         const method = methods[methodWithParams.replace(/\s/g, '')](...params);
+        if (nonce == 0) {
+            nonce = await this.Web3.eth.getTransactionCount(this.WalletData.account.address, "latest") //get latest nonce
+        }
         const tx = {
             from: this.WalletData.from, to: contractAddress, nonce: nonce, gas: gas, data: method
+        }
+        if (tx.gas == 0) {
+            tx.gas = await method.estimateGas(tx);
         }
         return await this.signAndSendTx(tx);
     }
