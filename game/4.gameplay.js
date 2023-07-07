@@ -14,7 +14,7 @@ async function Reset() {
 }
 
 // Game play
-document.body.innerHTML = "<main id=\"main\" class=\"background\">\n" + "        <section id='processing' class='hide' style='color: #f0f0f0'>Processing...</section><section class=\"display\">\n" + "            Player <span class=\"display-player playerX\">X</span>'s turn\n" + "        </section>\n" + "        <section class=\"container\">\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "        </section>\n" + "        <section class=\"display announcer hide\"></section>\n" + "        <section class=\"controls\">\n" + "            <button id=\"reset\">Reset</button>\n" + "        </section>\n" + "    </main>"
+document.body.innerHTML = "<main id=\"main\" class=\"background\">\n" + "        <section class=\"display\">\n" + "            Player <span class=\"display-player playerX\">X</span>'s turn\n" + "        </section>\n" + "        <section class=\"container\">\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "            <div class=\"tile\"></div>\n" + "        </section>\n" + "        <section class=\"display announcer hide\"></section>\n" + "        <section class=\"controls\">\n" + "            <button id=\"reset\">Reset</button>\n" + "        </section>\n<section id='processing' class='hide' style='color: #f0f0f0'>Processing...</section>" + "    </main>"
 window.addEventListener('DOMContentLoaded', () => {
     const tiles = Array.from(document.querySelectorAll('.tile'));
     const playerDisplay = document.querySelector('.display-player');
@@ -38,7 +38,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const winningConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 
-    function handleResultValidation() {
+    async function handleResultValidation() {
         let roundWon = false;
         for (let i = 0; i <= 7; i++) {
             const winCondition = winningConditions[i];
@@ -57,6 +57,8 @@ window.addEventListener('DOMContentLoaded', () => {
         if (roundWon) {
             announce(currentPlayer === 'X' ? PLAYERX_WON : PLAYERO_WON);
             isGameActive = false;
+            const temp = await PlayboardView();
+            alert(temp);
             return;
         }
 
@@ -141,7 +143,7 @@ window.addEventListener('DOMContentLoaded', () => {
             console.log(await PlayboardView());
             resetBoard();
         } catch (e) {
-            console.log(e);
+            alert(e);
         }
         hideProcessing();
     }
@@ -155,7 +157,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     console.log(await PlayboardView());
                     userAction(tile, index);
                 } catch (e) {
-                    console.log(e);
+                    alert(e);
                 }
                 hideProcessing();
             });

@@ -1,3 +1,5 @@
+import "@openzeppelin/contracts/utils/Strings.sol";
+
 contract SimpleTicTacToe {
 
     string[3][3] public playboard;
@@ -23,11 +25,16 @@ contract SimpleTicTacToe {
     function PlayboardView() public view returns (string memory result) {
         for (uint256 i = 0; i < 3; i++) {
             for (uint256 j = 0; j < 3; j++) {
-                result = string(abi.encodePacked(result, playboard[i][j], " | "));
+                if (bytes(playboard[i][j]).length > 0) {
+                    {}
+                    result = string(abi.encodePacked(result, playboard[i][j], " | "));
+                } else {
+                    result = string(abi.encodePacked(result, " ", " | "));
+                }
             }
             result = string(abi.encodePacked(result, "\n"));
         }
 
-        result = string(abi.encodePacked(result, " \n total ", totalMove));
+        result = string(abi.encodePacked(result, " \n total ", Strings.toString(totalMove)));
     }
 }
