@@ -11,11 +11,11 @@ class ContractInteraction {
     }
 
     async signAndSendTx(tx) {
-        const signedTx = this.Web3.eth.accounts.signTransaction(tx, WalletData.account.privateKey);
+        const signedTx = await this.Web3.eth.accounts.signTransaction(tx, this.WalletData.Wallet.account.privateKey);
         if (signedTx.rawTransaction != null) {
             let sentTx = await this.Web3.eth.sendSignedTransaction(signedTx.rawTransaction, function (err, txHash) {
                 if (!err) {
-                    console.log("The hash of your transaction is: ", hash, "\nCheck mempool to view the status of your transaction!")
+                    console.log("The hash of your transaction is: ", txHash, "\nCheck mempool to view the status of your transaction!")
                 } else {
                     console.log("Something went wrong when submitting your transaction:", err)
                 }
@@ -39,9 +39,10 @@ class ContractInteraction {
         const contract = this.loadContract(abiJson, contractAddress)
         const methods = contract.methods;
         const method = methods[methodWithParams.replace(/\s/g, '')](...params);
-        if (nonce == 0) {
-            nonce = await this.Web3.eth.getTransactionCount(this.WalletData.account.address, "latest") //get latest nonce
+        if (nonce == 0 || nonce == null) {
+            nonce = await this.Web3.eth.getTransactionCount(this.WalletData.Wallet.account.address, "latest") //get latest nonce
         }
+        console.log({nonce})
         const tx = {
             from: this.WalletData.from, to: contractAddress, nonce: nonce, gas: gas, data: method
         }
