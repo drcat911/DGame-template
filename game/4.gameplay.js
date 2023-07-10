@@ -2,15 +2,15 @@
 
 // Call Contract
 async function PlayboardView() {
-    return await contractInteraction.Call(TicTacToeAbiJson, TicTacToeContractAddress, 'PlayboardView()')
+    return await contractInteraction.Call(TicTacToeAbiJson, GAME_CONTRACT_ADDRESS, 'PlayboardView()')
 }
 
 async function Click(x, y, move) {
-    return await contractInteraction.Send(TicTacToeAbiJson, TicTacToeContractAddress, null, 0, 'Click(uint256, uint256, string)', x, y, move);
+    return await contractInteraction.Send(TicTacToeAbiJson, GAME_CONTRACT_ADDRESS, null, 0, 'Click(uint256, uint256, string)', x, y, move);
 }
 
 async function Reset() {
-    return await contractInteraction.Send(TicTacToeAbiJson, TicTacToeContractAddress, null, 0, 'Reset()');
+    return await contractInteraction.Send(TicTacToeAbiJson, GAME_CONTRACT_ADDRESS, null, 0, 'Reset()');
 }
 
 // Game play
