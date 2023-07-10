@@ -1,5 +1,5 @@
 const GAME_CONTRACT_ADDRESS = "0x9A63FF46dfA34296a2CBd5A0F0a3AB28d27Ebc07"
-const TicTacToeAbiJson = [{
+const GAME_CONTRACT_ABI_INTERFACE_JSON = [{
     "inputs": [{
         "internalType": "uint256", "name": "x", "type": "uint256"
     }, {
