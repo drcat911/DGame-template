@@ -1,3 +1,4 @@
+// DO NOT EDIT
 let web3;
 
 function preload() {
@@ -8,3 +9,4 @@ function preload() {
 }
 
 preload();
+// DO NOT EDIT

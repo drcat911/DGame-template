@@ -1,3 +1,4 @@
+// DO NOT EDIT
 class ContractInteraction {
     Web3;
     WalletData;
@@ -57,3 +58,4 @@ class ContractInteraction {
 let contractInteraction = new ContractInteraction();
 contractInteraction.WalletData = wallet;
 contractInteraction.Web3 = web3;
+// DO NOT EDIT

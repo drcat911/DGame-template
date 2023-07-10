@@ -1,3 +1,4 @@
+// DO NOT EDIT
 class WalletData {
     Wallet;
     Balance;
@@ -28,3 +29,4 @@ class WalletData {
 
 let wallet = new WalletData();
 wallet.LoadWallet();
+// DO NOT EDIT
