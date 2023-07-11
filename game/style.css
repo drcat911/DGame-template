@@ -85,4 +85,112 @@
     pointer-events: none;
 }
 
+body {
+    background-image: url("https://d.furaffinity.net/art/cyber-ogurchik/1631388545/1631388545.cyber-ogurchik_1123-1.gif");
+    background-size: cover;
+
+}
+
+.frame {
+    width: 500px;
+    height: 500px;
+    background-color: transparent;
+    margin: auto;
+    text-align: center;
+    position: relative;
+    top: -5rem;
+    z-index: -1;
+}
+
+img {
+    height: 200px;
+    width: 900px;
+    text-align: center;
+    margin: auto;
+}
+
+.frame1 {
+    text-align: center;
+    margin: auto;
+    z-index: 10;
+    margin-top: 35px;
+}
+
+button {
+    margin: 20px;
+    outline: none;
+}
+
+.custom-btn {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 80px;
+    padding-right: 80px;
+    border: 3px double #FF4294;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    font-size: 18px;
+    color: #000;
+    /* display: inline-block; */
+}
+
+.btn-11 {
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn-11:hover {
+    background: #000;
+    color: #fff;
+}
+
+.btn-11:before {
+    position: absolute;
+    content: '';
+    display: inline-block;
+    top: -180px;
+    left: 0;
+    width: 30px;
+    height: 100%;
+    background-color: #fff;
+    animation: shiny-btn1 3s ease-in-out infinite;
+}
+
+.btn-11:active {
+    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .3),
+        -4px -4px 6px 0 rgba(116, 125, 136, .2),
+        inset -4px -4px 6px 0 rgba(255, 255, 255, .2),
+        inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+}
+
+
+@-webkit-keyframes shiny-btn1 {
+    0% {
+        -webkit-transform: scale(0) rotate(45deg);
+        opacity: 0;
+    }
+
+    80% {
+        -webkit-transform: scale(0) rotate(45deg);
+        opacity: 0.5;
+    }
+
+    81% {
+        -webkit-transform: scale(4) rotate(45deg);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(50) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+.btn-group {
+    margin-top: 80px;
+}
+
 /*  ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Write all your style here ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
